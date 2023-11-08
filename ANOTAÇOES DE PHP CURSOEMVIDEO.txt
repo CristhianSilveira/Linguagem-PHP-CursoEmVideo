@@ -1,0 +1,523 @@
+			Anotações PHP - CursoEmVideo
+
+
+
+1- Comandos de saída do PHP:
+	Os comandos ECHO, PRINT e PRINTF servem para gerar saídas na tela. Um exemplo simples desse comando é:
+		EX: echo “Estou aprendendo variáveis em PHP”;
+
+2- Variáveis: 
+	2.0- Introdução:
+		Toda variável é iniciada com $(cifrão) e terminada com ponto e virgula. 
+	
+		OBS: PHP diferencia variáveis maiúsculas de minúsculas.
+		OBS2: PHP não existe declaração de variáveis EX: int, float, string, etc.
+		OBS3: Você pode forçar um tipo primitivo(coerção) a uma variável por TYPECAST, utilizando (int) (real) (float) (double) (string) antes do valor na atribuição. Não existe typecast para variáveis lógicas. Os valores booleanos são considerados números, sendo o valor 1 atribuído para true e vazio para false.
+		
+		EX1: $idade = 20;
+		EX2: $sal = 1825.54;
+		EX3: $nome = "Cristhian";
+		EX4: $casado = false;
+
+	2.1- Atribuição de valores:
+		Atribuir valor é colocar um conteúdo em uma variável. Utilizamos o operador de atribuição = para realizar essa tarefa.
+			EX1: $idade = 15;
+			EX2: $salario = 1500.25;
+			EX3: $nome = “Gustavo”;
+			EX4: $casado = true;
+
+	2.2- Valores em Binário, Octal e Hexadecimal:
+		Para representar valores em Hexadecimal basta iniciar com 0x.
+		Para representar valores em Binário basta iniciar com 0b.
+		Para representar valores em Octal basta iniciar com 0. 
+		EX: $hex = 0x1A;
+			>>Resultado: 26
+		EX2: $bin = 0b1011;
+			>>Resultado: 11
+		EX3: $oct = 010;
+			>>Resultado: 8
+
+	2.3- Mostrar o tipo da variável:
+		Para mostrar o tipo da variável basta colocar executar o comando var_dump().
+
+		EX: $nome = "Marcelo"
+			var_dump($nome);
+			>>Resultado: string(7)
+
+	2.4- Concatenação de valores:
+		Concatenar é juntar valores para tratá-los em conjunto. 
+		A concatenação em PHP é realizada pelo operador ponto (.) como no trecho de código a seguir. Porém, já que os identificadores PHP começam com um $, é possível realizar o comando de saída utilizando um modo simplificado:
+		EX: $idade = 18;
+			$nome = “Maria”;
+			echo “$nome tem $idade anos!”; OBS: " " =  double quoted
+			>>Resultado: Maria tem 18 anos!
+
+		EX2: echo '$nome tem $idade anos!'; OBS: ' ' = single quoted
+			>>Resultado: $nome tem $idade anos!
+
+		EX3: const ESTADO = "RJ";
+			echo "Moro no ". ESTADO; OBS: . = concatena
+			>>Resultado: Moro no RJ
+
+3- Operadores:
+	3.1- Operadores Aritméticos:
+		+  é o operador de adição:   EX: $r = $a + $b
+		-  é o operador de subtração:   EX: $r = $a - $b
+		*  é o operador de multiplicação:   EX: $r = $a * $b
+		/  é o operador de divisão Real:   EX: $r = $a / $b
+		%  é o operador de módulo (resto da divisão):   EX: $r = $a % $b
+		**  é o operador de exponenciação:   EX: $r = $a ** $b
+	
+	3.2- Ordem de precedência:
+		Outra coisa importante a saber é a ordem de precedência de operadores aritméticos em PHP. Sempre em uma expressão, os operadores que serão executados são, na ordem: 
+		Em primeiro lugar: parênteses ( )
+		Em segundo lugar: operador de potência, multiplicação, divisão e módulo ** * / %
+		Em seguida: as adições e subtrações + -
+
+	3.3- Obtendo valores da URL com PHP:
+		http://localhost/aula05/operadores.php?a=3&b=2
+		No link acima, o arquivo operadores.php está sendo chamado dentro da pasta aula05 do servidor local. Na linha, serão passados dois valores: a valendo 3 e b valendo 2.
+		Para pegar esses valores no script PHP, use o código:   $valor1 = $_GET["a"];   $valor2 = $_GET["b"];
+		No código acima, o parâmetro a (3) passado pela URL será armazenado na variável $valor1. De maneira similar, a variável $valor2 vai conter o valor do parâmetro b (2).
+
+	3.4- Funções Matemáticas em PHP:
+		abs() : Retorna o valor absoluto de um número. Ex: abs(-5) = 5
+		base_convert(valor, base padrão, base pretendida) : Converte um valor para qualquer base. EX: base_convert(254, 10, 2)
+		pow() : Calcula uma potência. Ex: pow(3,2) = 32 = 9
+		sqrt() : Calcula a raiz quadrada de um número. Ex: sqrt(25) = 5
+		round() : Arredonda valores. Ex: round(3.8) = 4
+		intval() : Trunca um número. Retorna a parte inteira de um valor. Ex: abs(8.7) = 8
+		min(), max(): Retorna o menor ou maior número no parâmetro. EX: min(2, 5, 4, 9, 3) = 2  EX2: max(5, 2, 6, 7, 1) = 7
+		number_format(número, casas, separador decimal, separador milhar/milhão) : Formata um número Real. Ex: number_format(8000, 2, ",", ".") = 8.000,000.
+		mt_rand(min, max) : Gera um número aleatório no intervalo especificado. EX: mt_rand(0, 100)
+
+	3.4- Operadores de Atribuição:
+		Os operadores de atribuição do PHP são += -= *= /= %= e .=
+		EX: $c = $c + 5;      $c += 5;
+		    $c = $c - $a;     $c -= $a;
+		    $c = $c + 1;      $c += 1;        $c++;
+
+	3.5- Variáveis Referenciadas:
+		Colocar um caractere & na frente de uma variável vai criar um ponteiro em PHP. Ela não será uma variável de fato, mas será uma referência à variável original. Considere o código:
+		Ex:
+			$x = 3;
+        	$y = $x;
+        	$z = &$x;
+		A variável $x vai receber 3. A variável $y vai receber o valor que está dentro da variável $x. A variável $z vai ser uma ligação com a variável $x. Mais tarde, qualquer modificação em $y não vai alterar o valor de $x. Porém, se mudarmos o valor de $z, o valor de $x será afetado, já que existe uma relação entre as duas.
+
+	3.6- Variáveis de Variáveis (variáveis variantes):
+		Colocar um segundo $ na frente de uma variável também possui um efeito bem peculiar. Ele vai criar uma variável dinamicamente, dependendo do conteúdo da variável original. Essas são as variáveis de variáveis em PHP.
+		EX:  	$nome = “gustavo”;
+ 				$$nome = “professor”;
+		Com essas linhas, teremos uma variável $nome, como o conteúdo “gustavo” e a linha de baixo vai criar uma variável $gustavo, com o conteúdo “professor”.
+
+	3.7- Operadores Relacionais:
+		>  é o operador de maior:   EX: $a > $b
+		<  é o operador de menor:   EX: $a < $b
+		>=  é o operador de maior ou igual :   EX: $a >= $b
+		<=  é o operador de menor ou igual:   EX: $a <= $b
+		<> ou != são os operadores de diferente:   EX: $a != $b
+		==  é o operador de igual:   EX: $a == $b
+		===  é o operador de tipo e valor igual:   EX: $a === $b
+		expressão?Verdade:Falso  é o operador unário:   EX: $a > $b? $a : $b
+
+	3.8- Operadores Lógicos:
+		&&  é o operador AND/E:   EX: $a > $b && $a = $b
+		||  é o operador OR/OU:   EX: $a > $b || $a = $b
+		!  é o operador Not/Não:   EX: $a > $b ! $a < $b
+
+4- Comentários:
+	Ente a tag <?php    ?> , podemos usar o sinal de #, // ou /* */ para adicionar comentários.
+
+5- Obter dados por formulário:
+	(1) Pegue o valor do atributo name do formulário no arquivo html
+	(2) Crie uma variável no arquivo php usando o método do formulário
+	(3) Use o operador de consciência nula(??), caso o campo não conter valor, envia um valor padrão.
+	(4) Use o echo para exibir a mensagem na tela.
+	
+	EX:	// Arquivo HTML
+		<label for="num">Valor:</label>
+        <input id="num" type="number" name="v"><br>
+	 	
+		// Arquivo PHP
+		$valor = $_GET["v"] ?? "sem valor";
+		echo "A raiz de $valor é igual a: ".number_format($rq, 2);
+		>>Resultado: A raiz de 4 é igual a: 2
+
+6- Estrutura Condicional e Estrutura de Repetição:
+	6.1- Estrutura Condicional IF:
+		Sintaxe: 	
+				if(condição){
+					Bloco de comandos;
+				} else{
+					Bloco de comandos;
+				}
+
+		EX:		if ($idade = 18) {
+ 					$vota = true;
+				} else {
+ 					$vota = false;
+				}
+
+		EX2:	if ($tipo == “nacional”) {
+ 					$imposto = 0;
+				} elseif ($tipo == “importado”) {
+ 					$imposto = 60;
+				} elseif ($tipo == “mercosul”) {
+ 					$imposto = 20;
+				} else {
+ 					$imposto = 80;
+				}
+
+	6.2- Estrutura Condicional Switch:
+		Sintaxe:
+				switch(condição){
+					Case 1:
+						Bloco de comando;
+						break;
+					Case 2:
+						Bloco de comando;
+						break;
+					default:
+						Bloco de comando;
+				}
+
+		EX:
+				switch ($dia) {
+					case 1:
+						echo "Segunda-Feira";
+						break;
+					case 2:
+						echo "Terça-Feira";
+						break;
+					case 3:
+						echo "Quarta-Feira";
+						break;
+					case 4:
+						echo "Quinta-Feira";
+						break;
+					case 5:
+						echo "Sexta-Feira";
+						break;
+					case 7:
+						echo "Sábado";
+						break;
+					case 6:
+						echo "Domingo";
+						break;
+					default:
+						echo "Dia inválido";
+				}
+
+	6.3- Estrutura de Repetição While:
+		Sintaxe:	
+					while (condição) {
+						Bloco de Comandos;
+						Incremento;
+					}
+
+		EX:			$c = 1;
+					while ($c <= 10) {
+ 						echo $c;
+ 						$c++;
+					}
+
+	6.4- Estrutura de Repetição do While:
+		Sintaxe:	
+					do {
+						Bloco de Comandos;
+						Incremento;
+					} while (condição);
+
+		EX:			$c = 1;
+					do {
+						echo $c;
+ 						$c++;
+					} while ($c <= 10)
+
+	6.5- Estrutura de Repetição For:
+		Sintaxe:	
+					for (variável; condição; incremento) {
+						Bloco de Comandos;
+					}
+
+		EX:			for ($c = 0; $c <= 10; $c++) {
+						echo "$c ";
+					}
+
+7- Rotinas em PHP:
+	São os procedimentos e funções.
+
+	7.1- Procedimentos:
+		São funções que não retornam valor. Recebe nome e parâmetros.
+		
+		EX:			function soma($a, $b){
+						$s = $a + $b;
+						echo "A soma dos valores é $s";
+					}
+					soma (3,4);
+					
+					>>Resultado: A soma dos valores é 7
+
+	7.2- Funções:
+		São funções que retornam valor e deve ser colocado em uma variável.
+
+		EX:			function soma($x, $y){
+						$s = $x + $y;
+						return $s;
+					}
+					$resultado = soma(4,5);
+
+					>>Resultado: 9
+
+	7.3- Rotinas com múltiplos parâmetros:
+
+		EX:			function soma(){
+						$p = func_get_Args(); // Pega todos os valores dos parâmetros e coloca em um vetor.
+						$tot = func_num_args(); // Retorna o número de argumentos passados
+
+						for ($i = 0; $i < $tot; $i++){
+							$s = $s + $p[$i];
+						}
+						return $s;
+					}
+					$resultado = soma(3,5,2);
+					echo "A soma dos valores é: $resultado";
+
+					>>Resultado: A soma dos valores é: 10;
+
+	7.4- Função com passagem por valor:
+
+		EX:			function teste($x){
+						$x = $x + 2;
+						echo $x;
+					}
+					$a = 3;
+					teste($a);
+					echo $a;
+
+					>>Resultado: 5 (valor de $x);
+					>>Resultado: 3 (valor de $a);
+
+	7.5- Função com passagem por referência:
+		Qualquer alteração em uma variável altera a outra.
+
+		EX:			function teste(&$x){
+						$x = $x + 2;
+						echo $x;
+					}
+					$a = 3;
+					teste($a);
+					echo $a;
+
+					>>Resultado: 5 (valor de $x);
+					>>Resultado: 5 (valor de $a);
+
+	7.6- Usar funções externas:
+		Basta criar um  arquivo externo com a função e usar o "include" para colocar nos arquivos desejados.
+
+		EX: 
+			// Arquivo funções com o nome: funcoes.php
+			<?php
+				function ola() {
+					echo "<h1>Olá, Mundo!</h1>";
+				}
+
+				function mostraValor ($valor) {
+					echo "<h2>Recebi o valor: $valor</h2>";
+				}
+			?>
+			
+			// Arquivo 1 com o nome: teste1.php
+			<?php
+				include "funcoes.php";
+				ola();
+			?>
+
+			>>Resultado: Olá, Mundo!
+
+			// Arquivo 2 com o nome: teste2.php
+			<?php
+				include "funcoes.php";
+				mostraValor(4);
+			?>
+
+			>>Resultado: Recebi o valor: 4
+
+8- Funções String:
+	
+	8.1- printf:
+		 Permite exibir uma string com itens formatados. OBS: $d = formata em valor decimal, $s = formata em string, $f = formata em valor float.
+		EX:	$prod = "Leite";
+    		$preco = 4.5;
+    		printf("O %s custa R$ %.2f", $prod, $preco); //$.2f = mostra a formatação com 2 casas decimais.
+
+			>>Resultado: O Leite custa R$ 4.50
+
+	8.2- print_r:
+		Exibe coleções, objetos e variáveis compostas (vetores e matrizes) de maneira organizada.
+		EX: $x[0] = 4;
+    		$x[1] = 3;
+    		$x[2] = 8;
+    		print_r($x);
+
+			>>Resultado: Array ( [0] => 4 [1] => 3 [2] => 8 )
+
+	8.3- wordwrap:
+		Cria quebras de linha ou divisões em uma string em um tamanho especificado.
+		EX: $t = "Aqui temos um texto gigante criado pelo PHP e vai mostrar o funcionamento da função wordwrap";
+			$r = wordwrap($t, 20, "<br/>\n", false); 
+			// wordwrap(variável, quantidade de caractere, br para código visual, false para quebrar em palavra)
+    		echo $r;
+
+	8.4- strlen:
+		Permite verificar o tamanho de uma string, contando seus caracteres (inclusive espaços em branco).
+		EX: $txt = "Curso em vídeo";
+    		$tamanho = strlen($txt);
+    		echo $tamanho;
+
+			>>Resultado: 15.
+
+	8.5- trim:
+		Elimina espaços em branco antes e depois de uma string.
+		EX: $nome = "   José da Silva   ";
+    		$novo = trim($nome);
+    		echo $novo;
+
+			>>Resultado: José da Silva
+
+	8.6- str_word_count:
+		Conta quantas palavras uma string possui.
+		EX: $frase = "Eu vou estudar PHP";
+    		$cont = str_word_count($frase, 0);
+    		echo $cont;
+
+			>>Resultado: 4
+
+	8.7- explode:
+		Divide cada palavra  em uma parte desejada da string e joga em um array.
+		EX: $site = "Curso em Vídeo";
+    		$vetor = explode(" ", $site); // explode(parte desejada da quebra, variável)
+    		print_r($vetor);
+
+			>>Resultado: Array ( [0] => Curso [1] => em [2] => Vídeo )
+
+	8.8- str_split:
+		Divide cada letra da string e joga em um array.
+		EX: $nome2 = "Maria";
+    		$vetor2 = str_split($nome2);
+			print_r($vetor2);
+
+			>>Resultado: Array ( [0] => M [1] => a [2] => r [3] => i [4] => a )
+
+	8.9- implode/ join:
+		Transforma um vetor inteiro em uma string com o caractere desejado.
+		EX: $vetor3[0] = "Curso";
+    		$vetor3[1] = "em";
+    		$vetor3[2] = "Vídeo";
+    		$texto = implode("#", $vetor3); //implode(caractere desejado, variável)
+			print($texto);
+
+			>>Resultado: Curso#em#Vídeo
+
+	8.10- chr:
+		 Retorna um caractere de acordo com seu código ASCII passado como parâmetro.
+		EX: $letra = chr(67);
+    		echo "A letra de código 67 é: $letra";
+
+			>>Resultado: A letra de código 67 é: C
+
+	8.11- ord:
+		Retorna o código ASCII de um caractere passado como parâmetro.
+		EX: $letra2 = "c";
+   			$cod = ord($letra2);
+    		echo "A letra $letra2 tem código: $cod";
+
+			>>Resultado: A letra c tem código: 99
+
+	8.12- strtolower:
+		Retorna a string toda em letras minúsculas.
+		EX:	$nome3 = "Gustavo Guanabara";
+        	echo "Seu nome é ". strtolower($nome3);
+
+			>>Resultado: Seu nome é gustavo guanabara
+
+	8.13- strtoupper:
+		Retornar a string toda em letras maiúsculas.
+		EX:	$nome4 = "Juninho Santos";
+    		echo "Seu nome é ". strtoupper($nome4);
+			
+			>>Resultado: Seu nome é JUNINHO SANTOS
+
+	8.14- ucfirst:
+		Coloca a primeira letra em maiúscula em uma string.
+		EX: $nome5 = "manoel gomes";
+    		echo "Seu nome é ". ucfirst($nome5);
+
+			>>Resultado: Seu nome é Manoel gomes
+
+	8.15- ucwords:
+		Coloca a primeira letra de cada palavra em maiúscula em uma string.
+		EX: $nome6 = "luiz inácio lula da silva";
+    		echo "Seu nome é ". ucwords($nome6);
+
+			>>Resultado: Seu nome é Luiz Inácio Lula Da Silva
+
+	8.16- strrev:
+		Mostra a string ao contrario.
+		EX: $nome7 = "cristhian silveira";
+   			echo "Seu nome inverso é ". strrev($nome7);
+
+			>>Resultado: Seu nome inverso é arievlis naihtsirc
+
+	8.17- stripos:
+		Retorna a posição da string desejada.
+		EX: $frase2 = "Estou aprendendo PHP";
+    		$pos = stripos($frase2, "php");
+    		echo "A string foi encontrada na posição $pos";
+
+			>>Resultado: A string foi encontrada na posição 17
+
+	8.18- substr_count:
+		Retorna quantas vezes a string desejada foi colocada na frase.
+		EX: $frase3= "Estou aprendendo PHP no Curso em Vídeo de PHP";
+    		$cont = substr_count($frase3, "PHP");
+    		print("PHP encontrado $cont vezes");
+
+			>>Resultado: PHP encontrado 2 vezes
+
+	8.19 - substr:
+		Fatia a string na posição inicial e na posição final desejada.
+		EX: $site2 = "Curso em Video";
+    		$sub = substr($site2,0,5);
+    		echo "$sub ";
+
+			>>Resultado: Curso
+
+	8.20- str_pad:
+		  String em comprimento e espaçador personalizados.
+		EX: $nome8 = "Carlos";
+    		$novo = str_pad($nome8, 30, " ", STR_PAD_RIGHT);
+    		print("Meu professor $novo é legal!");
+
+			>>Resultado: Meu professor Carlos é legal!
+
+	8.21- str_repeat:
+		Repete a string desejada quantas vezes você quiser.
+		EX: $txt2 = str_repeat("Php", 5);
+     		print("O texto gerado foi $txt2");
+
+			>>Resultado: O texto gerado foi PhpPhpPhpPhpPhp
+
+	8.22- str_ireplace:
+		Substituí a palavra por outra desejada.
+		EX: $frase4 = "Gosto de estudar Matemática!!!";
+    		$novafrase = str_ireplace("matemática", "PHP", $frase4);
+    		echo "$novafrase";
+
+			>>Resultado: Gosto de estudar PHP!!!
+
+9- SuperGlobais em PHP:
+	$_GET : Pega dados do formulário com método get ou pela URL.
+	$_POST : Pega dados do formulário com método post.
+	$_REQUEST : Pega dados do formulário com método get ou post.
